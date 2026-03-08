@@ -1,1 +1,25 @@
-<p>async-input-field works!</p>
+<div class="input-wrapper" [formGroup]="form">
+  <label [for]="controlName" class="field-label">
+    {{ label }}<span *ngIf="required" class="required">*</span>
+  </label>
+  <input
+    [id]="controlName"
+    [type]="type"
+    [placeholder]="placeholder"
+    [formControlName]="controlName"
+    class="field-input"
+    [class.input-invalid]="showRequiredError || showAlreadyExistsError"
+    [attr.autocomplete]="autocomplete"
+    [attr.name]="'field-' + controlName"
+    autocapitalize="off"
+    autocorrect="off"
+    spellcheck="false"
+    [readOnly]="preventAutofill && isReadonly"
+    (focus)="unlockInput()"
+    (mousedown)="unlockInput()"
+  />
+
+  <small class="info-text" *ngIf="checking">Checking availability...</small>
+  <small class="error-text" *ngIf="showRequiredError">{{ label }} is required.</small>
+  <small class="error-text" *ngIf="showAlreadyExistsError">{{ existsMessage }}</small>
+</div>

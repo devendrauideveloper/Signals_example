@@ -1,9 +1,33 @@
 <section class="signup-form-container">
   <h2>Signup</h2>
 
-  <form [formGroup]="signupForm" (ngSubmit)="submitForm()" novalidate autocomplete="off">
+  <form
+    [formGroup]="signupForm"
+    (ngSubmit)="submitForm()"
+    novalidate
+    autocomplete="off"
+  >
     <input type="text" autocomplete="username" tabindex="-1" class="d-none" />
-    <input type="password" autocomplete="current-password" tabindex="-1" class="d-none" />
+    <input
+      type="password"
+      autocomplete="current-password"
+      tabindex="-1"
+      class="d-none"
+    />
+
+    <app-async-input-field
+      label="Username"
+      controlName="username"
+      [form]="signupForm"
+      [required]="true"
+      [submitted]="submitted"
+      [debounceMs]="600"
+      [minLengthForCheck]="3"
+      [checkExistsFn]="checkUsernameExists"
+      existsMessage="Username already exists. Try another one."
+      autocomplete="off"
+      placeholder="Choose username"
+    />
 
     <app-input-field
       label="Full Name"

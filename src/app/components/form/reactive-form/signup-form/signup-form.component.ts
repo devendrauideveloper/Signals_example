@@ -1,19 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AsyncInputFieldComponent } from '../../../common-component/async-input-field/async-input-field.component';
 import { InputFieldComponent } from '../../../common-component/input-field/input-field.component';
+import { UserAvailabilityService } from '../../../../services/user-availability.service';
 
 @Component({
   selector: 'app-signup-form',
   standalone: true,
-  imports: [ReactiveFormsModule, InputFieldComponent],
+  imports: [ReactiveFormsModule, InputFieldComponent, AsyncInputFieldComponent],
   templateUrl: './signup-form.component.html',
   styleUrl: './signup-form.component.css',
 })
 export class SignupFormComponent {
   private readonly fb = new FormBuilder();
+  private readonly userAvailabilityService = inject(UserAvailabilityService);
   submitted = false;
 
   signupForm = this.fb.group({
+    username: ['', [Validators.required, Validators.minLength(3)]],
     fullName: ['', Validators.required],
     email: [
       '',
@@ -36,4 +40,7 @@ export class SignupFormComponent {
 
     console.log('Form submitted:', this.signupForm.value);
   }
+
+  checkUsernameExists = (username: string) =>
+    this.userAvailabilityService.checkUsernameExists(username);
 }
