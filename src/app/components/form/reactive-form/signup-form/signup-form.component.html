@@ -1,0 +1,42 @@
+<section class="signup-form-container">
+  <h2>Signup</h2>
+
+  <form [formGroup]="signupForm" (ngSubmit)="submitForm()" novalidate autocomplete="off">
+    <input type="text" autocomplete="username" tabindex="-1" class="d-none" />
+    <input type="password" autocomplete="current-password" tabindex="-1" class="d-none" />
+
+    <app-input-field
+      label="Full Name"
+      controlName="fullName"
+      [form]="signupForm"
+      [required]="true"
+      [submitted]="submitted"
+      autocomplete="off"
+      placeholder="Enter full name"
+    />
+
+    <app-input-field
+      label="Email"
+      controlName="email"
+      type="email"
+      [form]="signupForm"
+      [required]="true"
+      [submitted]="submitted"
+      autocomplete="new-password"
+      placeholder="Enter email"
+    />
+
+    <app-input-field
+      label="Password"
+      controlName="password"
+      type="password"
+      [form]="signupForm"
+      [required]="true"
+      [submitted]="submitted"
+      autocomplete="new-password"
+      placeholder="Enter password"
+    />
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</section>
