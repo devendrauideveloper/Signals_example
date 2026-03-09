@@ -1,0 +1,83 @@
+<section class="container mt-4">
+  <div class="card">
+    <div class="card-body">
+      <h2 class="h5">RxJS Subject Demo (Hot Observable)</h2>
+      <p class="mb-3">
+        Click the button to run:
+        <code>A subscribes -> next(1) -> next(2) -> B subscribes -> next(3)</code>
+      </p>
+
+      <button type="button" class="btn btn-primary" (click)="runSubjectExample()">
+        Run Subject Example
+      </button>
+
+      <div class="mt-3" *ngIf="subjectLogs.length">
+        <h3 class="h6">Output</h3>
+        <pre class="p-2 bg-light border rounded mb-2">{{ subjectLogs.join('\n') }}</pre>
+        <small class="text-muted">
+          Notice: subscriber B receives only <code>3</code>, so it misses <code>1</code> and
+          <code>2</code>.
+        </small>
+      </div>
+    </div>
+  </div>
+
+  <div class="card mt-4">
+    <div class="card-body">
+      <h2 class="h5">Flattening Operators Demo (Orders)</h2>
+      <p class="mb-3">
+        Stream sends <code>Order-1</code>, <code>Order-2</code>, <code>Order-3</code> quickly.
+        Each order takes 1200ms to complete.
+      </p>
+
+      <div class="d-flex flex-wrap gap-2 mb-3">
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          (click)="runFlatteningExample('switchMap')"
+        >
+          switchMap
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          (click)="runFlatteningExample('mergeMap')"
+        >
+          mergeMap
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          (click)="runFlatteningExample('concatMap')"
+        >
+          concatMap
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          (click)="runFlatteningExample('exhaustMap')"
+        >
+          exhaustMap
+        </button>
+      </div>
+
+      <p *ngIf="selectedOperator === 'switchMap'" class="text-muted mb-2">
+        New order arrives -> previous one cancels -> latest matters.
+      </p>
+      <p *ngIf="selectedOperator === 'mergeMap'" class="text-muted mb-2">
+        New order arrives -> old and new both run in parallel.
+      </p>
+      <p *ngIf="selectedOperator === 'concatMap'" class="text-muted mb-2">
+        New order arrives -> queue it -> run one by one.
+      </p>
+      <p *ngIf="selectedOperator === 'exhaustMap'" class="text-muted mb-2">
+        If one is already running -> ignore new orders.
+      </p>
+
+      <div *ngIf="flattenLogs.length">
+        <h3 class="h6">Output ({{ selectedOperator }})</h3>
+        <pre class="p-2 bg-light border rounded mb-0">{{ flattenLogs.join('\n') }}</pre>
+      </div>
+    </div>
+  </div>
+</section>

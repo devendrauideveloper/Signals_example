@@ -1,25 +1,25 @@
-<div class="input-wrapper" [formGroup]="form">
-  <label [for]="controlName" class="field-label">
-    {{ label }}<span *ngIf="required" class="required">*</span>
+<div class="input-wrapper" [formGroup]="form()">
+  <label [for]="controlName()" class="field-label">
+    {{ label() }}<span *ngIf="required()" class="required">*</span>
   </label>
   <input
-    [id]="controlName"
-    [type]="type"
-    [placeholder]="placeholder"
-    [formControlName]="controlName"
+    [id]="controlName()"
+    [type]="type()"
+    [placeholder]="placeholder()"
+    [formControlName]="controlName()"
     class="field-input"
     [class.input-invalid]="showRequiredError || showEmailError"
-    [attr.autocomplete]="autocomplete"
-    [attr.name]="'field-' + controlName"
+    [attr.autocomplete]="autocomplete()"
+    [attr.name]="'field-' + controlName()"
     autocapitalize="off"
     autocorrect="off"
     spellcheck="false"
-    [readOnly]="preventAutofill && isReadonly"
+    [readOnly]="preventAutofill() && isReadonly()"
     (focus)="unlockInput()"
     (mousedown)="unlockInput()"
   />
   <small class="error-text" *ngIf="showRequiredError">
-    {{ label }} is required.
+    {{ label() }} is required.
   </small>
   <small class="error-text" *ngIf="showEmailError">
     Enter a valid email (example&#64;domain.com).

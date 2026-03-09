@@ -1,0 +1,28 @@
+<section class="container mt-4">
+  <div class="card mb-4">
+    <div class="card-body">
+      <h2 class="h5">Dynamic Component Creation (Beginner Friendly)</h2>
+      <p class="mb-2">
+        Click <strong>Create Card</strong>. Angular will create a component at runtime and insert it below.
+      </p>
+      <ul>
+        <li><code>createComponent()</code> creates a new component instance dynamically.</li>
+        <li><code>#dynamicContainer</code> is the placeholder where new components appear.</li>
+        <li><code>clear()</code> removes all dynamically created components.</li>
+      </ul>
+
+      <div class="d-flex flex-wrap gap-2">
+        <button class="btn btn-primary" type="button" (click)="createCard()">Create Card</button>
+        <button class="btn btn-outline-secondary" type="button" (click)="removeLastCard()">
+          Remove Last Card
+        </button>
+        <button class="btn btn-outline-danger" type="button" (click)="clearAllCards()">
+          Clear All
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Angular injects created components here -->
+  <ng-container #dynamicContainer></ng-container>
+</section>
